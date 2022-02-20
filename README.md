@@ -13,3 +13,8 @@
 - [ ] Dynamic Programing
 - [ ] Sliding Window
 - [ ] ..
+
+### Self learning
+
+- [x] Regex -  feb 1st week
+- [ ] Micronaught - feb 2nd week
