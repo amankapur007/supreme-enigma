@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,26 +22,23 @@ class Solution {
                 map.put(i, 1);
             }
         }
-        List<Map.Entry<Integer, Integer>> l =  new LinkedList<>(map.entrySet());
-        l.sort((Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2)->{
-            if(o1.getValue()<o2.getValue()){
-                return 1;
-            }else if(o1.getValue()==o2.getValue()){
-                return 0;
-            }else{
-                return -1;
+        List<Integer>[] buckets = new List[nums.length+1];
+
+
+        for(Integer key : map.keySet()){
+            int freq =  map.get(key);
+            if(buckets[freq]==null){
+                buckets[freq]=new ArrayList<>();
             }
-        });
-        int result[] = new int[k];
-        int i=0;
-        for(Map.Entry<Integer, Integer> e:l){
-            result[i]=e.getKey();
-            i++;
-            if(i==k){
-                break;
+            buckets[freq].add(key);
+        }
+        List<Integer> result = new ArrayList<Integer>();
+        for(int i=buckets.length-1;i>=0&&result.size()!=k;i--){
+            if(buckets[i]!=null){
+                result.addAll(buckets[i]);
             }
         }
-        return result;
+        return result.stream().mapToInt(Integer::intValue).toArray();
     }
 }
 // @lc code=end
